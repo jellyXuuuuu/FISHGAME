@@ -34,47 +34,47 @@ def photo_pool():
     global fish_enemy5, fish_enemy6, fish_enemy7, fish_enemy8
     global background,newbackground,seed1,seed2,seed3,seed4,seed1_m,seed2_m,seed3_m,seed4_m
     global correct
-    fish2 = PhotoImage(file="fish2_3.png")
-    fish3 = PhotoImage(file="fish3.png")
-    fish5 = PhotoImage(file="fish2_3_right.png")
-    fish6 = PhotoImage(file="fish6.png")
-    fish8 = PhotoImage(file="fish2_3.png")  # size: 3cm, which is mininum
-    fish9 = PhotoImage(file="fish3.png")
-    fish10 = PhotoImage(file="fish2_3_right.png")
-    fish11 = PhotoImage(file="fish6.png")
+    fish2 = PhotoImage(file="imgs/fish2_3.png")
+    fish3 = PhotoImage(file="imgs/fish3.png")
+    fish5 = PhotoImage(file="imgs/fish2_3_right.png")
+    fish6 = PhotoImage(file="imgs/fish6.png")
+    fish8 = PhotoImage(file="imgs/fish2_3.png")  # size: 3cm, which is mininum
+    fish9 = PhotoImage(file="imgs/fish3.png")
+    fish10 = PhotoImage(file="imgs/fish2_3_right.png")
+    fish11 = PhotoImage(file="imgs/fish6.png")
 
     # setting for user fish>> from smallest to largest(3cm, 3.5cm, 4cm, 4.52cm)
-    fish1 = PhotoImage(file="fish1.1_3.png")  # user's fish 1
-    fish0 = PhotoImage(file="fish1.2_3.5.png") # user fish 2
-    fish7 = PhotoImage(file="fish1.3_4.png") #user fish 3
-    fish12 = PhotoImage(file="fish1.png") #user fish 4
+    fish1 = PhotoImage(file="imgs/fish1.1_3.png")  # user's fish 1
+    fish0 = PhotoImage(file="imgs/fish1.2_3.5.png") # user fish 2
+    fish7 = PhotoImage(file="imgs/fish1.3_4.png") #user fish 3
+    fish12 = PhotoImage(file="imgs/fish1.png") #user fish 4
 
     # special fish
-    fish_enemy1 = PhotoImage(file="fish4.png") # huge ugly fish to eat user fish!
-    fish_enemy2 = PhotoImage(file="fish4_right.png")
-    fish_enemy3 = PhotoImage(file="fish4_right.png")
-    fish_enemy4 = PhotoImage(file="fish4.png")
-    fish_enemy5 = PhotoImage(file="fish4_right.png")
-    fish_enemy6 = PhotoImage(file="fish4.png")
-    fish_enemy7 = PhotoImage(file="fish4_right.png")
-    fish_enemy8 = PhotoImage(file="fish4.png")
+    fish_enemy1 = PhotoImage(file="imgs/fish4.png") # huge ugly fish to eat user fish!
+    fish_enemy2 = PhotoImage(file="imgs/fish4_right.png")
+    fish_enemy3 = PhotoImage(file="imgs/fish4_right.png")
+    fish_enemy4 = PhotoImage(file="imgs/fish4.png")
+    fish_enemy5 = PhotoImage(file="imgs/fish4_right.png")
+    fish_enemy6 = PhotoImage(file="imgs/fish4.png")
+    fish_enemy7 = PhotoImage(file="imgs/fish4_right.png")
+    fish_enemy8 = PhotoImage(file="imgs/fish4.png")
 
     # background settings:
     # background = PhotoImage(file = "sea_2.png")
-    background = PhotoImage(file = "background.png")
-    newbackground = PhotoImage(file = "blue.png")
-    seed1 = PhotoImage(file="seed1.png")
-    seed2 = PhotoImage(file="seed2.png")
-    seed3 = PhotoImage(file="seed3.png")
-    seed4 = PhotoImage(file="seed1.png")
-    # set for seed mirrors
-    seed1_m = PhotoImage(file="seed1_m.png")
-    seed2_m = PhotoImage(file="seed2_m.png")
-    seed3_m = PhotoImage(file="seed3_m.png")
-    seed4_m = PhotoImage(file="seed1_m.png")
+    background = PhotoImage(file = "imgs/background.png")
+    newbackground = PhotoImage(file = "imgs/blue.png")
+    # seed1 = PhotoImage(file="seed1.png")
+    # seed2 = PhotoImage(file="seed2.png")
+    # seed3 = PhotoImage(file="seed3.png")
+    # seed4 = PhotoImage(file="seed1.png")
+    # # set for seed mirrors
+    # seed1_m = PhotoImage(file="seed1_m.png")
+    # seed2_m = PhotoImage(file="seed2_m.png")
+    # seed3_m = PhotoImage(file="seed3_m.png")
+    # seed4_m = PhotoImage(file="seed1_m.png")
 
     # image for cheat code
-    correct = PhotoImage(file="correct.png")
+    correct = PhotoImage(file="imgs/correct.png")
 
 
 def set_bg():
@@ -121,7 +121,7 @@ def set_bg():
 def main_menu():
     global flag, root, maincanvas, Label2, Label4, move_flag
     global newbackground, start_button, lb_button, quit_button, set_button
-    newbackground = PhotoImage(file = "blue.png")
+    newbackground = PhotoImage(file = "imgs/blue.png")
     maincanvas = Canvas(root, width = 900, height = 800, bg = "#D8BFD8")  # set the main canvas
     maincanvas.pack()
     maincanvas.create_image(420,320,image = newbackground, anchor = CENTER)
@@ -135,7 +135,7 @@ def main_menu():
     # line4 = maincanvas.create_line(50, 280, 350, 280, fill = '#FFDAB9')
 
     # ...... start new game button......
-    start_button = PhotoImage(file = 'button_start.gif')
+    start_button = PhotoImage(file = 'imgs/button_start.gif')
     button1 = Button(root, text="START", image = start_button, font = ("Times New Roman Bold", 12), command = root.destroy, anchor = CENTER)
     button1.configure(width = 200, activebackground = "#33B5E5", bg = "#135e77", relief = FLAT) # bg is MistyRose  ---  #FFE4E1 - ~=pink
     button1_window = maincanvas.create_window(350, 350, anchor=NW, window=button1)
@@ -160,7 +160,7 @@ def main_menu():
     # Label5_window = maincanvas.create_window(65, 60, anchor=NW, window=Label5)
 
     # force quit the whole program
-    quit_button = PhotoImage(file = 'button_quit.gif')
+    quit_button = PhotoImage(file = 'imgs/button_quit.gif')
     button6 = Button(root, text = "QUIT", image = quit_button,
      font = ("Times New Roman", 12), command = program_quit, anchor = CENTER)
     button6.configure(width = 200, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12),
@@ -168,7 +168,7 @@ def main_menu():
     button6_window = maincanvas.create_window(800, 500, anchor=NE, window=button6)
 
     # check for count board
-    lb_button = PhotoImage(file = 'button_lb.gif')
+    lb_button = PhotoImage(file = 'imgs/button_lb.gif')
     button7 = Button(root, text = "Leader Board", image = lb_button, font = ("Times New Roman", 12), command = rank_page, anchor = CENTER)
     button7.configure(width = 200, activebackground = "#33B5E5", relief = FLAT,
      font = ("Times New Roman Bold", 12), bg = "#135e77")
@@ -176,7 +176,7 @@ def main_menu():
 
     # costumize user to move the user fish
     move_flag = 2
-    set_button = PhotoImage(file = 'button_set.gif')
+    set_button = PhotoImage(file = 'imgs/button_set.gif')
     button8 = Button(root, text = "SETTING", image = set_button,
      font = ("Times New Roman", 12), command = fish_move_page, anchor = CENTER)
     button8.configure(width = 200, activebackground = "#33B5E5",
