@@ -32,137 +32,145 @@ def photo_pool():
     global fish7, fish8, fish9, fish10, fish11, fish12
     global fish_enemy1, fish_enemy2, fish_enemy3, fish_enemy4
     global fish_enemy5, fish_enemy6, fish_enemy7, fish_enemy8
-    global background,newbackground,seed1,seed2,seed3,seed4,seed1_m,seed2_m,seed3_m,seed4_m
+    global background,seed1,seed2,seed3,seed4,seed1_m,seed2_m,seed3_m,seed4_m
     global correct
-    fish2 = PhotoImage(file="imgs/fish2_3.png")
-    fish3 = PhotoImage(file="imgs/fish3.png")
-    fish5 = PhotoImage(file="imgs/fish2_3_right.png")
-    fish6 = PhotoImage(file="imgs/fish6.png")
-    fish8 = PhotoImage(file="imgs/fish2_3.png")  # size: 3cm, which is mininum
-    fish9 = PhotoImage(file="imgs/fish3.png")
-    fish10 = PhotoImage(file="imgs/fish2_3_right.png")
-    fish11 = PhotoImage(file="imgs/fish6.png")
+    fish2 = PhotoImage(file="fish2_3.png")
+    fish3 = PhotoImage(file="fish3.png")
+    fish5 = PhotoImage(file="fish2_3_right.png")
+    fish6 = PhotoImage(file="fish6.png")
+    fish8 = PhotoImage(file="fish2_3.png")  # size: 3cm, which is mininum
+    fish9 = PhotoImage(file="fish3.png")
+    fish10 = PhotoImage(file="fish2_3_right.png")
+    fish11 = PhotoImage(file="fish6.png")
 
     # setting for user fish>> from smallest to largest(3cm, 3.5cm, 4cm, 4.52cm)
-    fish1 = PhotoImage(file="imgs/fish1.1_3.png")  # user's fish 1
-    fish0 = PhotoImage(file="imgs/fish1.2_3.5.png") # user fish 2
-    fish7 = PhotoImage(file="imgs/fish1.3_4.png") #user fish 3
-    fish12 = PhotoImage(file="imgs/fish1.png") #user fish 4
+    fish1 = PhotoImage(file="fish1.1_3.png")  # user's fish 1
+    fish0 = PhotoImage(file="fish1.2_3.5.png") # user fish 2
+    fish7 = PhotoImage(file="fish1.3_4.png") #user fish 3
+    fish12 = PhotoImage(file="fish1.png") #user fish 4
 
     # special fish
-    fish_enemy1 = PhotoImage(file="imgs/fish4.png") # huge ugly fish to eat user fish!
-    fish_enemy2 = PhotoImage(file="imgs/fish4_right.png")
-    fish_enemy3 = PhotoImage(file="imgs/fish4_right.png")
-    fish_enemy4 = PhotoImage(file="imgs/fish4.png")
-    fish_enemy5 = PhotoImage(file="imgs/fish4_right.png")
-    fish_enemy6 = PhotoImage(file="imgs/fish4.png")
-    fish_enemy7 = PhotoImage(file="imgs/fish4_right.png")
-    fish_enemy8 = PhotoImage(file="imgs/fish4.png")
+    fish_enemy1 = PhotoImage(file="fish4.png") # huge ugly fish to eat user fish!
+    fish_enemy2 = PhotoImage(file="fish4_right.png")
+    fish_enemy3 = PhotoImage(file="fish4_right.png")
+    fish_enemy4 = PhotoImage(file="fish4.png")
+    fish_enemy5 = PhotoImage(file="fish4_right.png")
+    fish_enemy6 = PhotoImage(file="fish4.png")
+    fish_enemy7 = PhotoImage(file="fish4_right.png")
+    fish_enemy8 = PhotoImage(file="fish4.png")
 
     # background settings:
-    background = PhotoImage(file = "imgs/background.png")
-    newbackground = PhotoImage(file = "imgs/blue.png")
+    background = PhotoImage(file = "sea_2.png")
+    seed1 = PhotoImage(file="seed1.png")
+    seed2 = PhotoImage(file="seed2.png")
+    seed3 = PhotoImage(file="seed3.png")
+    seed4 = PhotoImage(file="seed1.png")
+    # set for seed mirrors
+    seed1_m = PhotoImage(file="seed1_m.png")
+    seed2_m = PhotoImage(file="seed2_m.png")
+    seed3_m = PhotoImage(file="seed3_m.png")
+    seed4_m = PhotoImage(file="seed1_m.png")
 
     # image for cheat code
-    correct = PhotoImage(file="imgs/correct.png")
+    correct = PhotoImage(file="correct.png")
 
 
 def set_bg():
     global canvas, f, r1,r2,r3
     global window
     # set the size of canvas
-    canvas = Canvas(window, width =900, height = 800)
+    canvas = Canvas(window, width = 800, height = 500)
     # set the focus to the canvas widget
     canvas.grab_set()
     canvas.pack() #display the main canvas for game
-    canvas.create_image(420,300,image = background, anchor = CENTER) # event ID: 1
+    canvas.create_image(0,0,image = background, anchor = CENTER) # event ID: 1
 
-    # # set several stars
-    # star = []
-    # c = ["white", "#fefefe", "#dfdfdf"]
-    # for i_star in range(400):
-    #     x_star = rand(1,799)
-    #     y_star = rand(1,500)
-    #     size = rand(2,5)
-    #     f_star = rand(0,2)
-    #     xy = (x_star, y_star, x_star+size, y_star+size)
-    #     tmp_star = canvas.create_oval(xy)
-    #     canvas.itemconfig(tmp_star, fill=c[f_star])
-    #     star.append(tmp_star)
+    # set several stars
+    star = []
+    c = ["white", "#fefefe", "#dfdfdf"]
+    for i_star in range(400):
+        x_star = rand(1,799)
+        y_star = rand(1,500)
+        size = rand(2,5)
+        f_star = rand(0,2)
+        xy = (x_star, y_star, x_star+size, y_star+size)
+        tmp_star = canvas.create_oval(xy)
+        canvas.itemconfig(tmp_star, fill=c[f_star])
+        star.append(tmp_star)
+
+    # insert photos for seed
+    for n in range(0, 800, 99):
+        seed_time = time.time()
+        # if n % 2 == 0:
+        s1.append(canvas.create_image(n,400,image = seed1, anchor = NW))
+        # print(s1) # [3, 8, 13, 18, 23, 28, 33, 38, 43]  x8
+        s4.append(canvas.create_image(n+99,450,image = seed4, anchor = CENTER))
+        s2.append(canvas.create_image(n+33,400,image = seed3, anchor = CENTER))
+        s3.append(canvas.create_image(n+66,400,image = seed2, anchor = CENTER))
+        s5.append(canvas.create_image(n,480,image = seed2, anchor = CENTER))
+        s1.append(canvas.create_image(n+10,400,image = seed1_m, anchor = NW))
+        s2.append(canvas.create_image(n+40,420,image = seed3_m, anchor = CENTER))
+        s3.append(canvas.create_image(n+70,420,image = seed2_m, anchor = CENTER))
+        s4.append(canvas.create_image(n+100,450,image = seed4_m, anchor = CENTER))
+        s5.append(canvas.create_image(n+10,480,image = seed2_m, anchor = CENTER))
+        s5.append(canvas.create_image(n+60,480,image = seed3_m, anchor = CENTER))
 
 
 def main_menu():
     global flag, root, maincanvas, Label2, Label4, move_flag
-    global newbackground, start_button, lb_button, quit_button, set_button
-    newbackground = PhotoImage(file = "imgs/blue.png")
-    maincanvas = Canvas(root, width = 900, height = 800, bg = "#D8BFD8")  # set the main canvas
+    maincanvas = Canvas(root, width = 400, height = 400, bg = "#D8BFD8")  # set the main canvas
     maincanvas.pack()
-    maincanvas.create_image(420,320,image = newbackground, anchor = CENTER)
-    # rect1 = maincanvas.create_rectangle(50, 15, 350, 45, fill = '#4B0082') # #4682B4
-    # Text1 = maincanvas.create_text(200, 30, text = "Leader Board", font = ("Times New Roman Bold", 20), fill = 'white')
-    # rect2 = maincanvas.create_rectangle(50, 355, 350, 45, fill = '#483D8B')
-    # mainline = maincanvas.create_line(0, 50, 400, 50, fill = '#FFDAB9', width = 5)
-    # line1 = maincanvas.create_line(50, 100, 350, 100, fill = '#FFDAB9')
-    # line2 = maincanvas.create_line(50, 160, 350, 160, fill = '#FFDAB9')
-    # line3 = maincanvas.create_line(50, 220, 350, 220, fill = '#FFDAB9')
-    # line4 = maincanvas.create_line(50, 280, 350, 280, fill = '#FFDAB9')
+    rect1 = maincanvas.create_rectangle(50, 15, 350, 45, fill = '#4B0082') # #4682B4
+    Text1 = maincanvas.create_text(200, 30, text = "Leader Board", font = ("Times New Roman Bold", 20), fill = 'white')
+    rect2 = maincanvas.create_rectangle(50, 355, 350, 45, fill = '#483D8B')
+    mainline = maincanvas.create_line(0, 50, 400, 50, fill = '#FFDAB9', width = 5)
+    line1 = maincanvas.create_line(50, 100, 350, 100, fill = '#FFDAB9')
+    line2 = maincanvas.create_line(50, 160, 350, 160, fill = '#FFDAB9')
+    line3 = maincanvas.create_line(50, 220, 350, 220, fill = '#FFDAB9')
+    line4 = maincanvas.create_line(50, 280, 350, 280, fill = '#FFDAB9')
 
     # ...... start new game button......
-    start_button = PhotoImage(file = 'imgs/button_start.gif')
-    button1 = Button(root, text="START", image = start_button, font = ("Times New Roman Bold", 12), command = root.destroy, anchor = CENTER)
-    button1.configure(width = 200, activebackground = "#33B5E5", bg = "#135e77", relief = FLAT) # bg is MistyRose  ---  #FFE4E1 - ~=pink
-    button1_window = maincanvas.create_window(350, 350, anchor=NW, window=button1)
+    button1 = Button(root, text = "***Start***", font = ("Times New Roman Bold", 12), command = root.destroy, anchor = CENTER)
+    button1.configure(width = 18, activebackground = "#33B5E5", bg = "#FFE4E1", relief = FLAT) # bg is MistyRose
+    button1_window = maincanvas.create_window(100, 300, anchor=NW, window=button1)
 
     # check for count board/leader board
     count_board()
 
-    # Label2 = Label(root, text = "", font = ("Times New Roman", 12), anchor = CENTER)
-    # Label2.configure(width = 28, fg = "#B22222", relief = FLAT, bg = "#E0FFFF", text=text_max) # font color:FireBrick
-    # Label2_window = maincanvas.create_window(65, 110, anchor=NW, window=Label2)
+    Label2 = Label(root, text = "", font = ("Times New Roman", 12), anchor = CENTER)
+    Label2.configure(width = 28, fg = "#B22222", relief = FLAT, bg = "#E0FFFF", text=text_max) # font color:FireBrick
+    Label2_window = maincanvas.create_window(65, 110, anchor=NW, window=Label2)
 
-    # Label3 = Label(root, text = "No.2", font = ("Times New Roman Bold", 12), anchor = CENTER)
-    # Label3.configure(width = 24, bg = "#E0FFFF", fg = "#8B4513", relief = FLAT)
-    # Label3_window = maincanvas.create_window(65, 180, anchor=NW, window=Label3)
+    Label3 = Label(root, text = "No.2", font = ("Times New Roman Bold", 12), anchor = CENTER)
+    Label3.configure(width = 24, bg = "#E0FFFF", fg = "#8B4513", relief = FLAT)
+    Label3_window = maincanvas.create_window(65, 180, anchor=NW, window=Label3)
 
-    # Label4 = Label(root, text = "", font = ("Times New Roman", 12), anchor = CENTER)
-    # Label4.configure(width = 28, bg = "#E0FFFF", fg = "#B22222", relief = FLAT, text=text_next)
-    # Label4_window = maincanvas.create_window(65, 230, anchor=NW, window=Label4)
+    Label4 = Label(root, text = "", font = ("Times New Roman", 12), anchor = CENTER)
+    Label4.configure(width = 28, bg = "#E0FFFF", fg = "#B22222", relief = FLAT, text=text_next)
+    Label4_window = maincanvas.create_window(65, 230, anchor=NW, window=Label4)
 
-    # Label5 = Label(root, text = "No.1", font = ("Times New Roman Bold", 12), anchor = CENTER)
-    # Label5.configure(width = 24, bg = "#E0FFFF", fg = "#8B4513", relief = FLAT) # front color:SaddleBrown
-    # Label5_window = maincanvas.create_window(65, 60, anchor=NW, window=Label5)
+    Label5 = Label(root, text = "No.1", font = ("Times New Roman Bold", 12), anchor = CENTER)
+    Label5.configure(width = 24, bg = "#E0FFFF", fg = "#8B4513", relief = FLAT) # front color:SaddleBrown
+    Label5_window = maincanvas.create_window(65, 60, anchor=NW, window=Label5)
 
     # force quit the whole program
-    quit_button = PhotoImage(file = 'imgs/button_quit.gif')
-    button6 = Button(root, text = "QUIT", image = quit_button,
-     font = ("Times New Roman", 12), command = program_quit, anchor = CENTER)
-    button6.configure(width = 200, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12),
-     bg = "#135e77", fg = "#008080")
-    button6_window = maincanvas.create_window(800, 500, anchor=NE, window=button6)
+    button6 = Button(root, text = "Quit", font = ("Times New Roman", 12), command = program_quit, anchor = CENTER)
+    button6.configure(width = 8, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12), bg = "#E0FFFF", fg = "#008080")
+    button6_window = maincanvas.create_window(400, 360, anchor=NE, window=button6)
 
     # check for count board
-    lb_button = PhotoImage(file = 'imgs/button_lb.gif')
-    button7 = Button(root, text = "Leader Board", image = lb_button, font = ("Times New Roman", 12), command = rank_page, anchor = CENTER)
-    button7.configure(width = 200, activebackground = "#33B5E5", relief = FLAT,
-     font = ("Times New Roman Bold", 12), bg = "#135e77")
-    button7_window = maincanvas.create_window(220, 50, anchor=NE, window=button7)
+    button7 = Button(root, text = "Count Board", font = ("Times New Roman", 12), command = rank_page, anchor = CENTER)
+    button7.configure(width = 10, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12), bg = "#E0FFFF", fg = "#008080")
+    button7_window = maincanvas.create_window(120, 360, anchor=NE, window=button7)
 
     # costumize user to move the user fish
     move_flag = 2
-    set_button = PhotoImage(file = 'imgs/button_set.gif')
-    button8 = Button(root, text = "SETTING", image = set_button,
-     font = ("Times New Roman", 12), command = fish_move_page, anchor = CENTER)
-    button8.configure(width = 200, activebackground = "#33B5E5",
-     relief = FLAT, font = ("Times New Roman Bold", 12),
-      bg = "#135e77", fg = "#008080")
-    button8_window = maincanvas.create_window(370, 500, anchor=NE, window=button8)
+    button8 = Button(root, text = "customize fish move seting", font = ("Times New Roman", 12), command = fish_move_page, anchor = CENTER)
+    button8.configure(width = 10, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12), bg = "#E0FFFF", fg = "#008080")
+    button8_window = maincanvas.create_window(270, 360, anchor=NE, window=button8)
 
     # prompt a message box for guiding
-    tkinter.messagebox.showinfo(title='WELCOME',
-     message='The game is about to control your fish\
-     (the green one) to eat others(similar blue and red fish);\
-     \nHowever, if you meet those Pufferfish,\
-      you will be eaten and fail the game!') 
+    tkinter.messagebox.showinfo(title='WELCOME', message='The game is about to control your fish(the green one) to eat others(similar blue and red fish);\nHowever, if you meet those Pufferfish, you will be eaten and fail the game!') 
 
     return move_flag
 
@@ -253,17 +261,14 @@ def rank_page():
 
 
 def fish_move_page():
-    global move_flag, window_for_set
-    window_for_set = Tk()
-    window_for_set.grab_set()
-    window_for_set.geometry("280x600")
-    window_for_set.title("SETTING")
+    global move_flag
+
     move_flag = 2
-    button1 = Button(window_for_set, text = "array key move", font = ("Times New Roman", 12), command = lambda: [move_set(1)], anchor = CENTER)
+    button1 = Button(root, text = "array key move", font = ("Times New Roman", 12), command = lambda: [move_set(1)], anchor = CENTER)
     button1.pack()
-    button2 = Button(window_for_set, text = "WASD key move", font = ("Times New Roman", 12), command = lambda: [move_set(2)], anchor = CENTER)
+    button2 = Button(root, text = "WASD key move", font = ("Times New Roman", 12), command = lambda: [move_set(2)], anchor = CENTER)
     button2.pack()
-    button3 = Button(window_for_set, text = "mouse move", font = ("Times New Roman", 12), command = lambda: [move_set(3)], anchor = CENTER)
+    button3 = Button(root, text = "mouse move", font = ("Times New Roman", 12), command = lambda: [move_set(3)], anchor = CENTER)
     button3.pack()
 
     return move_flag
@@ -289,8 +294,6 @@ def move_set(event):
 
 def program_quit():
     print("Thank you for your time! Have a nice day!")
-    tkinter.messagebox.showinfo(title='GAME END',
-        message = 'Press yes to exit the game')
     os._exit(0)
 
 
@@ -307,7 +310,7 @@ def configure_window(window):
 
 
 def log_in_quit():
-    global user_ID, user_round, user_count, T1, flag, previous_time
+    global user_ID, user_round, user_count, T1, flag
     with open("game_info.json", mode = "r+") as myFile:
         try:
             data = json.load(myFile)
@@ -325,7 +328,6 @@ def log_in_quit():
             user_round = data[x]['Round']
             count = data[x]['Score']
             flag = data[x]['Flag']
-            previous_time = data[x]['Time']
 
     print("Hello " + user_name[len(user_name) - 1]+  " Welcome to my fish game!")
     print("User Number/ID: " + str(user_ID))
@@ -345,7 +347,6 @@ def log_in_quit_new():
 def get_user_name():
     global T1,user_ID, flag
     global data
-    global x, y, count, previous_time
     # first to read the data from json file
     with open("game_info.json", mode = "r+") as myFile:
         try:
@@ -358,42 +359,32 @@ def get_user_name():
 
     # enter and get a user name
     if T1.get() != "":
-        for x0 in range(len(data)):
+        for x in range(len(data)):
             # get a existed user(back to the saved game)
-            if T1.get() == data[x0]['Name']:
+            if T1.get() == data[x]['Name']:
                 user_name.append(T1.get())
-                user_ID = data[x0]['ID']
-                user_round = data[x0]['Round']
-                count = data[x0]['Score']
-                flag = data[x0]['Flag']
-                x = data[x0]['CoordsX']
-                y = data[x0]['CoordsY']
-                previous_time = data[x0]['Time']
+                user_ID = data[x]['ID']
+                user_round = data[x]['Round']
+                count = data[x]['Score']
+                flag = data[x]['Flag']
                 print(user_round, "check for user_round")
                 print(user_count)
                 log_in_quit()
-                return user_name, user_round, user_count,\
-                 flag, count, x, y
+                return user_name, user_round, user_count, flag, count
 
         else:
             user_name.append(T1.get())
             print(user_name, "Create a new record!")
-            user_ID = data[x0]['ID'] + 1  # add one more record for user_ID, which should be unique
+            user_ID = data[x]['ID'] + 1  # add one more record for user_ID, which should be unique
             flag = 0
-            count = 0
-            x = 150
-            y = 400
             log_in_quit_new()
 
     else:
         # overwritten the record of 'Local' user
         user_ID = 0 # 0 is the ID for default user 'Local'
-        count = 0
         print("You have not enter a name!\nDefault use as the 'Local' name.")
         user_name.append("Local")
         print(user_name)
-        x = 150
-        y = 400
         log_in_quit_new()
 
 
@@ -458,7 +449,7 @@ def Main_game_loop():
 
     # window.focus_set()
     window.grab_set()
-    # count = 0
+    count = 0
     cheat_code_flag = 0
 
     # set the round:
@@ -504,7 +495,6 @@ def Main_game_loop():
     # main loop for the main fish game
     while 1:
         # when you enter '<p>', u can stop the game
-        # canvas.bind("<p>", sys_pause)
         canvas.bind_all("<p>", sys_pause)
         # boss key
         canvas.bind_all("<space>", boss_key)
@@ -527,15 +517,13 @@ def sys_pause(event):
     ''' when you enter '<p>', u can stop the game
         if you want to contine the game, just enter any key in the terminal
         and than game will continue '''
-    # if event.keysym == "p":
-    tick1 = time.time()
-    # text = input("Enter any key to back to the game: \n")
-    tkinter.messagebox.showinfo(title='Pause',
-     message='Pause: Press yes to return to the game')
-    # subprocess.call("pause",shell=True)
-    # os.system("pause")
-    tick2 = time.time()
-    time_block = time_block + tick2 - tick1
+    if event.keysym == "p":
+        tick1 = time.time()
+        text = input("Enter any key to back to the game: \n")
+        # subprocess.call("pause",shell=True)
+        # os.system("pause")
+        tick2 = time.time()
+        time_block = time_block + tick2 - tick1
 
     return time_block
 
@@ -594,7 +582,7 @@ def boss_key(event):
 def save_game():
     global round_one, round_two, round_three, user_round, user_ID, user_name, \
     user_count, user_time, count
-    global tick, time_block, x, y
+    global tick, time_block
     time_end = time.time()
     time_end_array = time.localtime(time_end)
     time_end_for_read = time.strftime("%Y-%m-%d %H:%M:%S", time_end_array)
@@ -612,10 +600,6 @@ def save_game():
         user_round = 1
     else:
         user_round = 0
-
-    user_coordsX = x
-    user_coordsY = y
-
 
     print("You are in round ", user_round)
     with open("game_info.json", mode = "r+") as f:
@@ -637,13 +621,11 @@ def save_game():
             temp_dict['Name'] = user_name[len(user_name)-1]
             temp_dict['Score'] = count
             temp_dict['Round'] = user_round
-            temp_dict['CoordsX'] = user_coordsX
-            temp_dict['CoordsY'] = user_coordsY
             if flag == 0:
                 temp_dict['Flag'] = flag
             else:
                 temp_dict['Flag'] = flag - 1
-            temp_dict['Time'] = user_time + previous_time
+            temp_dict['Time'] = user_time
             result[user_ID] = temp_dict
 
         else:
@@ -652,8 +634,6 @@ def save_game():
             temp_dict2['Name'] = user_name[len(user_name)-1]
             temp_dict2['Score'] = count
             temp_dict2['Round'] = user_round
-            temp_dict2['CoordsX'] = user_coordsX
-            temp_dict2['CoordsY'] = user_coordsY
             if flag == 0:
                 temp_dict2['Flag'] = flag
             else:
@@ -704,11 +684,11 @@ def myfish():
     global window, move_flag
     global x, y
     global round_one, round_control_1, round_two, round_three, flag
-    # x = 150  # x, y for the coordinate of user fish
-    # y = 400
+    x = 150
+    y = 400
     if not round_one:
         # f is the envent ID for original user fish
-        f = canvas.create_image(x,y,image = fish1)
+        f = canvas.create_image(150,400,image = fish1)
 
     # can add some option for user to choose: whether use array key or
     # mouse to move the user fish
@@ -716,10 +696,10 @@ def myfish():
         canvas.bind_all('<B1-Motion>', mouse_move) 
     # bind the array key with the moving event
     elif move_flag == 2:
-        canvas.bind_all("<KeyPress-Up>",user_fish_move) 
-        canvas.bind_all("<KeyPress-Down>",user_fish_move)
-        canvas.bind_all("<KeyPress-Left>",user_fish_move)
-        canvas.bind_all("<KeyPress-Right>",user_fish_move)
+        canvas.bind_all("<KeyRelease-Up>",user_fish_move) 
+        canvas.bind_all("<KeyRelease-Down>",user_fish_move)
+        canvas.bind_all("<KeyRelease-Left>",user_fish_move)
+        canvas.bind_all("<KeyRelease-Right>",user_fish_move)
     elif move_flag == 3:
         canvas.bind_all("<KeyRelease-w>",user_fish_move) 
         canvas.bind_all("<KeyRelease-s>",user_fish_move)
@@ -745,7 +725,7 @@ def mouse_move(event):
         canvas.coords(r2, x, y)
     elif round_three == 1:
         canvas.coords(r3, x, y)
-    # time_count()
+    time_count()
     check_for_upgrade()
 
     return x, y
@@ -785,7 +765,7 @@ def user_fish_move(event):
         x += 20
 
     # count will increase when move your fish
-    # time_count()
+    time_count()
     check_for_upgrade()
 
     return x,y
@@ -802,10 +782,10 @@ def ocean_fish_move_lefttoright(fish_num1, fish_num2, fish_num3, fish_num4):
     # if not round_one and not round_control_1:
     if not round_one:
         for t in range(100):
-            canvas.move(fish_num1,6,0)
-            x1 = 6 * t
-            canvas.move(fish_num2,6,0)
-            x2 = 6 * t
+            canvas.move(fish_num1,10,0)
+            x1 = 10 * t
+            canvas.move(fish_num2,10,0)
+            x2 = 10 * t
             x_rand1 = rand(-20, -10)
             x_rand2 = rand(10, 20)
             # enemy fish1 move from right to left; enemy fish2 move from left to right
@@ -823,7 +803,7 @@ def ocean_fish_move_lefttoright(fish_num1, fish_num2, fish_num3, fish_num4):
         print(str(x2) + "," + str(y2))
         print("Too long time to pass this round! game over")
         save_game()
-        # time.sleep(10)
+        time.sleep(10)
         program_quit()
 
     return x1,x2,y1,y2, x_enemy1, x_enemy2, y_enemy1, y_enemy2
@@ -845,15 +825,15 @@ def ocean_fish_move_four(fish_num1, fish_num2, fish_num3, fish_num4,
 
     for t in range(100):
         # right to left
-        canvas.move(fish_num3,-7,0)
-        x3 = 700 - 7 * t
-        canvas.move(fish_num4,-7,0)
-        x4 = 700 - 7 * t
+        canvas.move(fish_num3,-10,0)
+        x3 = 700 - 10 * t
+        canvas.move(fish_num4,-10,0)
+        x4 = 700 - 10 * t
         # left to right
-        canvas.move(fish_num1,7,0)
-        x1 = 7 * t
-        canvas.move(fish_num2,7,0)
-        x2 = 7 * t
+        canvas.move(fish_num1,10,0)
+        x1 = 10 * t
+        canvas.move(fish_num2,10,0)
+        x2 = 10 * t
 
         x_rand1 = rand(-20, -10)
         x_rand2 = rand(10, 20)
@@ -878,7 +858,7 @@ def ocean_fish_move_four(fish_num1, fish_num2, fish_num3, fish_num4,
     print(str(x4) + "," + str(y4))
     print("Too long time to pass this round! game over")
     save_game()
-    # time.sleep(10)
+    time.sleep(10)
     program_quit()
 
 
@@ -894,10 +874,10 @@ def ocean_fish_move_righttoleft(fish_num1, fish_num2, fish_num3, fish_num4):
 
     for t in range(100):
         # move more fish after the user fish upgraded
-        canvas.move(fish_num1,-6,0)
-        x3 = 800 - 6 * t
-        canvas.move(fish_num2,-6,0)
-        x4 = 800 - 6 * t
+        canvas.move(fish_num1,-10,0)
+        x3 = 800 - 10 * t
+        canvas.move(fish_num2,-10,0)
+        x4 = 800 - 10 * t
 
         x_rand1 = rand(-20, -10)
         x_rand2 = rand(10, 20)
@@ -917,7 +897,7 @@ def ocean_fish_move_righttoleft(fish_num1, fish_num2, fish_num3, fish_num4):
     print(str(x4) + "," + str(y4))
     print("Too long time to pass this round! game over")
     save_game()
-    # time.sleep(10)
+    time.sleep(10)
     program_quit()
 
     return x3, x4, y3, y4, x_enemy1, x_enemy2, y_enemy1, y_enemy2
@@ -962,7 +942,7 @@ def collisions(level):
                 canvas.itemconfig(scoreText, text = txt)
                 print(str(count))
                 save_game()
-                # time.sleep(5)
+                time.sleep(5)
                 program_quit()
 
             elif count1 == 0 and (collision_check(f_rect, f_rect2) or collision_check(f_rect2, f_rect)):
@@ -1026,7 +1006,7 @@ def collisions(level):
                 canvas.itemconfig(scoreText, text = txt)
                 # print(str(count))
                 save_game()
-                # time.sleep(5)
+                time.sleep(5)
                 program_quit()
 
             elif count3 == 0 and (collision_check(f_rect, f_rect4) or collision_check(f_rect4, f_rect)):
@@ -1093,7 +1073,7 @@ def collisions(level):
                 canvas.itemconfig(scoreText, text = txt)
                 # print(str(count))
                 save_game()
-                # time.sleep(5)
+                time.sleep(5)
                 program_quit()
 
             elif count5 == 0 and (collision_check(f_rect, f_rect8) or collision_check(f_rect8, f_rect)):
