@@ -289,6 +289,8 @@ def move_set(event):
 
 def program_quit():
     print("Thank you for your time! Have a nice day!")
+    tkinter.messagebox.showinfo(title='GAME END',
+        message = 'Press yes to exit the game')
     os._exit(0)
 
 
@@ -694,10 +696,10 @@ def myfish():
         canvas.bind_all('<B1-Motion>', mouse_move) 
     # bind the array key with the moving event
     elif move_flag == 2:
-        canvas.bind_all("<KeyRelease-Up>",user_fish_move) 
-        canvas.bind_all("<KeyRelease-Down>",user_fish_move)
-        canvas.bind_all("<KeyRelease-Left>",user_fish_move)
-        canvas.bind_all("<KeyRelease-Right>",user_fish_move)
+        canvas.bind_all("<KeyPress-Up>",user_fish_move) 
+        canvas.bind_all("<KeyPress-Down>",user_fish_move)
+        canvas.bind_all("<KeyPress-Left>",user_fish_move)
+        canvas.bind_all("<KeyPress-Right>",user_fish_move)
     elif move_flag == 3:
         canvas.bind_all("<KeyRelease-w>",user_fish_move) 
         canvas.bind_all("<KeyRelease-s>",user_fish_move)
@@ -780,10 +782,10 @@ def ocean_fish_move_lefttoright(fish_num1, fish_num2, fish_num3, fish_num4):
     # if not round_one and not round_control_1:
     if not round_one:
         for t in range(100):
-            canvas.move(fish_num1,10,0)
-            x1 = 10 * t
-            canvas.move(fish_num2,10,0)
-            x2 = 10 * t
+            canvas.move(fish_num1,6,0)
+            x1 = 6 * t
+            canvas.move(fish_num2,6,0)
+            x2 = 6 * t
             x_rand1 = rand(-20, -10)
             x_rand2 = rand(10, 20)
             # enemy fish1 move from right to left; enemy fish2 move from left to right
@@ -801,7 +803,7 @@ def ocean_fish_move_lefttoright(fish_num1, fish_num2, fish_num3, fish_num4):
         print(str(x2) + "," + str(y2))
         print("Too long time to pass this round! game over")
         save_game()
-        time.sleep(10)
+        # time.sleep(10)
         program_quit()
 
     return x1,x2,y1,y2, x_enemy1, x_enemy2, y_enemy1, y_enemy2
@@ -823,15 +825,15 @@ def ocean_fish_move_four(fish_num1, fish_num2, fish_num3, fish_num4,
 
     for t in range(100):
         # right to left
-        canvas.move(fish_num3,-10,0)
-        x3 = 700 - 10 * t
-        canvas.move(fish_num4,-10,0)
-        x4 = 700 - 10 * t
+        canvas.move(fish_num3,-7,0)
+        x3 = 700 - 7 * t
+        canvas.move(fish_num4,-7,0)
+        x4 = 700 - 7 * t
         # left to right
-        canvas.move(fish_num1,10,0)
-        x1 = 10 * t
-        canvas.move(fish_num2,10,0)
-        x2 = 10 * t
+        canvas.move(fish_num1,7,0)
+        x1 = 7 * t
+        canvas.move(fish_num2,7,0)
+        x2 = 7 * t
 
         x_rand1 = rand(-20, -10)
         x_rand2 = rand(10, 20)
@@ -856,7 +858,7 @@ def ocean_fish_move_four(fish_num1, fish_num2, fish_num3, fish_num4,
     print(str(x4) + "," + str(y4))
     print("Too long time to pass this round! game over")
     save_game()
-    time.sleep(10)
+    # time.sleep(10)
     program_quit()
 
 
@@ -872,10 +874,10 @@ def ocean_fish_move_righttoleft(fish_num1, fish_num2, fish_num3, fish_num4):
 
     for t in range(100):
         # move more fish after the user fish upgraded
-        canvas.move(fish_num1,-10,0)
-        x3 = 800 - 10 * t
-        canvas.move(fish_num2,-10,0)
-        x4 = 800 - 10 * t
+        canvas.move(fish_num1,-6,0)
+        x3 = 800 - 6 * t
+        canvas.move(fish_num2,-6,0)
+        x4 = 800 - 6 * t
 
         x_rand1 = rand(-20, -10)
         x_rand2 = rand(10, 20)
@@ -895,7 +897,7 @@ def ocean_fish_move_righttoleft(fish_num1, fish_num2, fish_num3, fish_num4):
     print(str(x4) + "," + str(y4))
     print("Too long time to pass this round! game over")
     save_game()
-    time.sleep(10)
+    # time.sleep(10)
     program_quit()
 
     return x3, x4, y3, y4, x_enemy1, x_enemy2, y_enemy1, y_enemy2
@@ -940,7 +942,7 @@ def collisions(level):
                 canvas.itemconfig(scoreText, text = txt)
                 print(str(count))
                 save_game()
-                time.sleep(5)
+                # time.sleep(5)
                 program_quit()
 
             elif count1 == 0 and (collision_check(f_rect, f_rect2) or collision_check(f_rect2, f_rect)):
@@ -1004,7 +1006,7 @@ def collisions(level):
                 canvas.itemconfig(scoreText, text = txt)
                 # print(str(count))
                 save_game()
-                time.sleep(5)
+                # time.sleep(5)
                 program_quit()
 
             elif count3 == 0 and (collision_check(f_rect, f_rect4) or collision_check(f_rect4, f_rect)):
@@ -1071,7 +1073,7 @@ def collisions(level):
                 canvas.itemconfig(scoreText, text = txt)
                 # print(str(count))
                 save_game()
-                time.sleep(5)
+                # time.sleep(5)
                 program_quit()
 
             elif count5 == 0 and (collision_check(f_rect, f_rect8) or collision_check(f_rect8, f_rect)):
