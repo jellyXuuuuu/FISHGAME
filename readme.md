@@ -1,3 +1,7 @@
+# Basic:
+
+This is a simple python game about big fish eat smaller ones! Download it and play it by using python command to start it!
+
 # MAIN SETTINGS: 
 
 1. set the screen resolution as '1920X1080'
