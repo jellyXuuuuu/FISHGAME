@@ -307,7 +307,7 @@ def configure_window(window):
 
 
 def log_in_quit():
-    global user_ID, user_round, user_count, T1, flag
+    global user_ID, user_round, user_count, T1, flag, previous_time
     with open("game_info.json", mode = "r+") as myFile:
         try:
             data = json.load(myFile)
@@ -325,6 +325,7 @@ def log_in_quit():
             user_round = data[x]['Round']
             count = data[x]['Score']
             flag = data[x]['Flag']
+            previous_time = data[x]['Time']
 
     print("Hello " + user_name[len(user_name) - 1]+  " Welcome to my fish game!")
     print("User Number/ID: " + str(user_ID))
@@ -344,7 +345,7 @@ def log_in_quit_new():
 def get_user_name():
     global T1,user_ID, flag
     global data
-    global x, y, count
+    global x, y, count, previous_time
     # first to read the data from json file
     with open("game_info.json", mode = "r+") as myFile:
         try:
@@ -367,6 +368,7 @@ def get_user_name():
                 flag = data[x0]['Flag']
                 x = data[x0]['CoordsX']
                 y = data[x0]['CoordsY']
+                previous_time = data[x0]['Time']
                 print(user_round, "check for user_round")
                 print(user_count)
                 log_in_quit()
@@ -641,7 +643,7 @@ def save_game():
                 temp_dict['Flag'] = flag
             else:
                 temp_dict['Flag'] = flag - 1
-            temp_dict['Time'] = user_time
+            temp_dict['Time'] = user_time + previous_time
             result[user_ID] = temp_dict
 
         else:
