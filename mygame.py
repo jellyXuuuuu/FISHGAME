@@ -344,6 +344,7 @@ def log_in_quit_new():
 def get_user_name():
     global T1,user_ID, flag
     global data
+    global x, y, count
     # first to read the data from json file
     with open("game_info.json", mode = "r+") as myFile:
         try:
@@ -356,32 +357,41 @@ def get_user_name():
 
     # enter and get a user name
     if T1.get() != "":
-        for x in range(len(data)):
+        for x0 in range(len(data)):
             # get a existed user(back to the saved game)
-            if T1.get() == data[x]['Name']:
+            if T1.get() == data[x0]['Name']:
                 user_name.append(T1.get())
-                user_ID = data[x]['ID']
-                user_round = data[x]['Round']
-                count = data[x]['Score']
-                flag = data[x]['Flag']
+                user_ID = data[x0]['ID']
+                user_round = data[x0]['Round']
+                count = data[x0]['Score']
+                flag = data[x0]['Flag']
+                x = data[x0]['CoordsX']
+                y = data[x0]['CoordsY']
                 print(user_round, "check for user_round")
                 print(user_count)
                 log_in_quit()
-                return user_name, user_round, user_count, flag, count
+                return user_name, user_round, user_count,\
+                 flag, count, x, y
 
         else:
             user_name.append(T1.get())
             print(user_name, "Create a new record!")
             user_ID = data[x]['ID'] + 1  # add one more record for user_ID, which should be unique
             flag = 0
+            count = 0
+            x = 150
+            y = 400
             log_in_quit_new()
 
     else:
         # overwritten the record of 'Local' user
         user_ID = 0 # 0 is the ID for default user 'Local'
+        count = 0
         print("You have not enter a name!\nDefault use as the 'Local' name.")
         user_name.append("Local")
         print(user_name)
+        x = 150
+        y = 400
         log_in_quit_new()
 
 
@@ -446,7 +456,7 @@ def Main_game_loop():
 
     # window.focus_set()
     window.grab_set()
-    count = 0
+    # count = 0
     cheat_code_flag = 0
 
     # set the round:
@@ -582,7 +592,7 @@ def boss_key(event):
 def save_game():
     global round_one, round_two, round_three, user_round, user_ID, user_name, \
     user_count, user_time, count
-    global tick, time_block
+    global tick, time_block, x, y
     time_end = time.time()
     time_end_array = time.localtime(time_end)
     time_end_for_read = time.strftime("%Y-%m-%d %H:%M:%S", time_end_array)
@@ -600,6 +610,10 @@ def save_game():
         user_round = 1
     else:
         user_round = 0
+
+    user_coordsX = x
+    user_coordsY = y
+
 
     print("You are in round ", user_round)
     with open("game_info.json", mode = "r+") as f:
@@ -621,6 +635,8 @@ def save_game():
             temp_dict['Name'] = user_name[len(user_name)-1]
             temp_dict['Score'] = count
             temp_dict['Round'] = user_round
+            temp_dict['CoordsX'] = user_coordsX
+            temp_dict['CoordsY'] = user_coordsY
             if flag == 0:
                 temp_dict['Flag'] = flag
             else:
@@ -684,11 +700,11 @@ def myfish():
     global window, move_flag
     global x, y
     global round_one, round_control_1, round_two, round_three, flag
-    x = 150
-    y = 400
+    # x = 150  # x, y for the coordinate of user fish
+    # y = 400
     if not round_one:
         # f is the envent ID for original user fish
-        f = canvas.create_image(150,400,image = fish1)
+        f = canvas.create_image(x,y,image = fish1)
 
     # can add some option for user to choose: whether use array key or
     # mouse to move the user fish
@@ -725,7 +741,7 @@ def mouse_move(event):
         canvas.coords(r2, x, y)
     elif round_three == 1:
         canvas.coords(r3, x, y)
-    time_count()
+    # time_count()
     check_for_upgrade()
 
     return x, y
@@ -765,7 +781,7 @@ def user_fish_move(event):
         x += 20
 
     # count will increase when move your fish
-    time_count()
+    # time_count()
     check_for_upgrade()
 
     return x,y
