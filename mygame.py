@@ -378,7 +378,7 @@ def get_user_name():
         else:
             user_name.append(T1.get())
             print(user_name, "Create a new record!")
-            user_ID = data[x]['ID'] + 1  # add one more record for user_ID, which should be unique
+            user_ID = data[x0]['ID'] + 1  # add one more record for user_ID, which should be unique
             flag = 0
             count = 0
             x = 150
@@ -652,6 +652,8 @@ def save_game():
             temp_dict2['Name'] = user_name[len(user_name)-1]
             temp_dict2['Score'] = count
             temp_dict2['Round'] = user_round
+            temp_dict2['CoordsX'] = user_coordsX
+            temp_dict2['CoordsY'] = user_coordsY
             if flag == 0:
                 temp_dict2['Flag'] = flag
             else:
