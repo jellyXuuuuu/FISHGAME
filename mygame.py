@@ -60,18 +60,8 @@ def photo_pool():
     fish_enemy8 = PhotoImage(file="imgs/fish4.png")
 
     # background settings:
-    # background = PhotoImage(file = "sea_2.png")
     background = PhotoImage(file = "imgs/background.png")
     newbackground = PhotoImage(file = "imgs/blue.png")
-    # seed1 = PhotoImage(file="seed1.png")
-    # seed2 = PhotoImage(file="seed2.png")
-    # seed3 = PhotoImage(file="seed3.png")
-    # seed4 = PhotoImage(file="seed1.png")
-    # # set for seed mirrors
-    # seed1_m = PhotoImage(file="seed1_m.png")
-    # seed2_m = PhotoImage(file="seed2_m.png")
-    # seed3_m = PhotoImage(file="seed3_m.png")
-    # seed4_m = PhotoImage(file="seed1_m.png")
 
     # image for cheat code
     correct = PhotoImage(file="imgs/correct.png")
@@ -99,23 +89,6 @@ def set_bg():
     #     tmp_star = canvas.create_oval(xy)
     #     canvas.itemconfig(tmp_star, fill=c[f_star])
     #     star.append(tmp_star)
-
-    # # insert photos for seed
-    # for n in range(0, 800, 99):
-    #     seed_time = time.time()
-    #     # if n % 2 == 0:
-    #     s1.append(canvas.create_image(n,400,image = seed1, anchor = NW))
-    #     # print(s1) # [3, 8, 13, 18, 23, 28, 33, 38, 43]  x8
-    #     s4.append(canvas.create_image(n+99,450,image = seed4, anchor = CENTER))
-    #     s2.append(canvas.create_image(n+33,400,image = seed3, anchor = CENTER))
-    #     s3.append(canvas.create_image(n+66,400,image = seed2, anchor = CENTER))
-    #     s5.append(canvas.create_image(n,480,image = seed2, anchor = CENTER))
-    #     s1.append(canvas.create_image(n+10,400,image = seed1_m, anchor = NW))
-    #     s2.append(canvas.create_image(n+40,420,image = seed3_m, anchor = CENTER))
-    #     s3.append(canvas.create_image(n+70,420,image = seed2_m, anchor = CENTER))
-    #     s4.append(canvas.create_image(n+100,450,image = seed4_m, anchor = CENTER))
-    #     s5.append(canvas.create_image(n+10,480,image = seed2_m, anchor = CENTER))
-    #     s5.append(canvas.create_image(n+60,480,image = seed3_m, anchor = CENTER))
 
 
 def main_menu():
@@ -185,7 +158,11 @@ def main_menu():
     button8_window = maincanvas.create_window(370, 500, anchor=NE, window=button8)
 
     # prompt a message box for guiding
-    tkinter.messagebox.showinfo(title='WELCOME', message='The game is about to control your fish(the green one) to eat others(similar blue and red fish);\nHowever, if you meet those Pufferfish, you will be eaten and fail the game!') 
+    tkinter.messagebox.showinfo(title='WELCOME',
+     message='The game is about to control your fish\
+     (the green one) to eat others(similar blue and red fish);\
+     \nHowever, if you meet those Pufferfish,\
+      you will be eaten and fail the game!') 
 
     return move_flag
 
@@ -276,14 +253,17 @@ def rank_page():
 
 
 def fish_move_page():
-    global move_flag
-
+    global move_flag, window_for_set
+    window_for_set = Tk()
+    window_for_set.grab_set()
+    window_for_set.geometry("280x600")
+    window_for_set.title("SETTING")
     move_flag = 2
-    button1 = Button(root, text = "array key move", font = ("Times New Roman", 12), command = lambda: [move_set(1)], anchor = CENTER)
+    button1 = Button(window_for_set, text = "array key move", font = ("Times New Roman", 12), command = lambda: [move_set(1)], anchor = CENTER)
     button1.pack()
-    button2 = Button(root, text = "WASD key move", font = ("Times New Roman", 12), command = lambda: [move_set(2)], anchor = CENTER)
+    button2 = Button(window_for_set, text = "WASD key move", font = ("Times New Roman", 12), command = lambda: [move_set(2)], anchor = CENTER)
     button2.pack()
-    button3 = Button(root, text = "mouse move", font = ("Times New Roman", 12), command = lambda: [move_set(3)], anchor = CENTER)
+    button3 = Button(window_for_set, text = "mouse move", font = ("Times New Roman", 12), command = lambda: [move_set(3)], anchor = CENTER)
     button3.pack()
 
     return move_flag
@@ -510,6 +490,7 @@ def Main_game_loop():
     # main loop for the main fish game
     while 1:
         # when you enter '<p>', u can stop the game
+        # canvas.bind("<p>", sys_pause)
         canvas.bind_all("<p>", sys_pause)
         # boss key
         canvas.bind_all("<space>", boss_key)
@@ -532,13 +513,15 @@ def sys_pause(event):
     ''' when you enter '<p>', u can stop the game
         if you want to contine the game, just enter any key in the terminal
         and than game will continue '''
-    if event.keysym == "p":
-        tick1 = time.time()
-        text = input("Enter any key to back to the game: \n")
-        # subprocess.call("pause",shell=True)
-        # os.system("pause")
-        tick2 = time.time()
-        time_block = time_block + tick2 - tick1
+    # if event.keysym == "p":
+    tick1 = time.time()
+    # text = input("Enter any key to back to the game: \n")
+    tkinter.messagebox.showinfo(title='Pause',
+     message='Pause: Press yes to return to the game')
+    # subprocess.call("pause",shell=True)
+    # os.system("pause")
+    tick2 = time.time()
+    time_block = time_block + tick2 - tick1
 
     return time_block
 
