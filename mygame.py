@@ -60,7 +60,8 @@ def photo_pool():
     fish_enemy8 = PhotoImage(file="fish4.png")
 
     # background settings:
-    background = PhotoImage(file = "sea_2.png")
+    # background = PhotoImage(file = "sea_2.png")
+    background = PhotoImage(file = "background.png")
     newbackground = PhotoImage(file = "blue.png")
     seed1 = PhotoImage(file="seed1.png")
     seed2 = PhotoImage(file="seed2.png")
@@ -80,24 +81,24 @@ def set_bg():
     global canvas, f, r1,r2,r3
     global window
     # set the size of canvas
-    canvas = Canvas(window, width = 800, height = 500)
+    canvas = Canvas(window, width =900, height = 800)
     # set the focus to the canvas widget
     canvas.grab_set()
     canvas.pack() #display the main canvas for game
-    canvas.create_image(0,0,image = background, anchor = CENTER) # event ID: 1
+    canvas.create_image(420,300,image = background, anchor = CENTER) # event ID: 1
 
-    # set several stars
-    star = []
-    c = ["white", "#fefefe", "#dfdfdf"]
-    for i_star in range(400):
-        x_star = rand(1,799)
-        y_star = rand(1,500)
-        size = rand(2,5)
-        f_star = rand(0,2)
-        xy = (x_star, y_star, x_star+size, y_star+size)
-        tmp_star = canvas.create_oval(xy)
-        canvas.itemconfig(tmp_star, fill=c[f_star])
-        star.append(tmp_star)
+    # # set several stars
+    # star = []
+    # c = ["white", "#fefefe", "#dfdfdf"]
+    # for i_star in range(400):
+    #     x_star = rand(1,799)
+    #     y_star = rand(1,500)
+    #     size = rand(2,5)
+    #     f_star = rand(0,2)
+    #     xy = (x_star, y_star, x_star+size, y_star+size)
+    #     tmp_star = canvas.create_oval(xy)
+    #     canvas.itemconfig(tmp_star, fill=c[f_star])
+    #     star.append(tmp_star)
 
     # # insert photos for seed
     # for n in range(0, 800, 99):
@@ -119,7 +120,7 @@ def set_bg():
 
 def main_menu():
     global flag, root, maincanvas, Label2, Label4, move_flag
-    global newbackground, start_button, lb_button
+    global newbackground, start_button, lb_button, quit_button, set_button
     newbackground = PhotoImage(file = "blue.png")
     maincanvas = Canvas(root, width = 900, height = 800, bg = "#D8BFD8")  # set the main canvas
     maincanvas.pack()
@@ -136,8 +137,8 @@ def main_menu():
     # ...... start new game button......
     start_button = PhotoImage(file = 'button_start.gif')
     button1 = Button(root, text="START", image = start_button, font = ("Times New Roman Bold", 12), command = root.destroy, anchor = CENTER)
-    button1.configure(width = 200, activebackground = "#33B5E5", bg = "#135e77", relief = FLAT) # bg is MistyRose    #FFE4E1 - pink?
-    button1_window = maincanvas.create_window(100, 300, anchor=NW, window=button1)
+    button1.configure(width = 200, activebackground = "#33B5E5", bg = "#135e77", relief = FLAT) # bg is MistyRose  ---  #FFE4E1 - ~=pink
+    button1_window = maincanvas.create_window(350, 350, anchor=NW, window=button1)
 
     # check for count board/leader board
     count_board()
@@ -159,21 +160,29 @@ def main_menu():
     # Label5_window = maincanvas.create_window(65, 60, anchor=NW, window=Label5)
 
     # force quit the whole program
-    button6 = Button(root, text = "Quit", font = ("Times New Roman", 12), command = program_quit, anchor = CENTER)
-    button6.configure(width = 8, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12), bg = "#E0FFFF", fg = "#008080")
-    button6_window = maincanvas.create_window(400, 360, anchor=NE, window=button6)
+    quit_button = PhotoImage(file = 'button_quit.gif')
+    button6 = Button(root, text = "QUIT", image = quit_button,
+     font = ("Times New Roman", 12), command = program_quit, anchor = CENTER)
+    button6.configure(width = 200, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12),
+     bg = "#135e77", fg = "#008080")
+    button6_window = maincanvas.create_window(800, 500, anchor=NE, window=button6)
 
     # check for count board
     lb_button = PhotoImage(file = 'button_lb.gif')
     button7 = Button(root, text = "Leader Board", image = lb_button, font = ("Times New Roman", 12), command = rank_page, anchor = CENTER)
-    button7.configure(width = 200, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12), bg = "#135e77")
-    button7_window = maincanvas.create_window(120, 360, anchor=NE, window=button7)
+    button7.configure(width = 200, activebackground = "#33B5E5", relief = FLAT,
+     font = ("Times New Roman Bold", 12), bg = "#135e77")
+    button7_window = maincanvas.create_window(220, 50, anchor=NE, window=button7)
 
     # costumize user to move the user fish
     move_flag = 2
-    button8 = Button(root, text = "customize fish move seting", font = ("Times New Roman", 12), command = fish_move_page, anchor = CENTER)
-    button8.configure(width = 10, activebackground = "#33B5E5", relief = FLAT, font = ("Times New Roman Bold", 12), bg = "#E0FFFF", fg = "#008080")
-    button8_window = maincanvas.create_window(270, 360, anchor=NE, window=button8)
+    set_button = PhotoImage(file = 'button_set.gif')
+    button8 = Button(root, text = "SETTING", image = set_button,
+     font = ("Times New Roman", 12), command = fish_move_page, anchor = CENTER)
+    button8.configure(width = 200, activebackground = "#33B5E5",
+     relief = FLAT, font = ("Times New Roman Bold", 12),
+      bg = "#135e77", fg = "#008080")
+    button8_window = maincanvas.create_window(370, 500, anchor=NE, window=button8)
 
     # prompt a message box for guiding
     tkinter.messagebox.showinfo(title='WELCOME', message='The game is about to control your fish(the green one) to eat others(similar blue and red fish);\nHowever, if you meet those Pufferfish, you will be eaten and fail the game!') 
